@@ -9,11 +9,9 @@ pub fn is_left_index(index: usize) -> bool {
 
 pub fn get_sibling_index(index: usize) -> usize {
     if is_left_index(index) {
-        println!("Left sibling index");
         // Right sibling index
         return index + 1;
     }
-    println!("Right sibling index");
     // Left sibling index
     index - 1
 }
