@@ -11,7 +11,12 @@ impl Hasher for RescueAlgorithm {
     type Hash = [u8; 32];
 
     fn hash(data: &[u8]) -> [u8; 32] {
-        let u64_slice: &[u64] = cast_slice(&data);
+        let mut padded_data = data.to_vec();
+
+        while padded_data.len() % 8 != 0 {
+            padded_data.push(0);
+        }
+        let u64_slice: &[u64] = cast_slice(&padded_data);
         let hash_result = RescuePrimeOptimized(u64_slice.to_vec());
         let hash_u8_slice: &[u8] = cast_slice(&hash_result);
         assert!(
