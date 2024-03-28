@@ -24,10 +24,8 @@ pub fn sibling_indices(indices: &[usize]) -> Vec<usize> {
 
 pub fn parent_index(index: usize) -> usize {
     if is_left_index(index) {
-        println!("Left parent index");
         return index / 2;
     }
-    println!("Right parent index");
     get_sibling_index(index) / 2
 }
 

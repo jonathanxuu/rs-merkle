@@ -1,3 +1,5 @@
+use std::println;
+
 use crate::prelude::*;
 use crate::{partial_tree::PartialTree, utils, utils::indices, Hasher, MerkleProof};
 
@@ -133,6 +135,7 @@ impl<T: Hasher> MerkleTree<T> {
 
         for layer in self.helper_node_tuples(leaf_indices) {
             for (_index, hash) in layer {
+                println!("the _index is : {:?}", _index);
                 helper_nodes.push(hash)
             }
         }
