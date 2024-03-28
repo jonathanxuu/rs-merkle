@@ -3,6 +3,7 @@
 //! [`Hasher`]: crate::Hasher
 mod sha256;
 mod sha384;
-
+mod rescue;
+pub use rescue::RescueAlgorithm as Rescue;
 pub use sha256::Sha256Algorithm as Sha256;
 pub use sha384::Sha384Algorithm as Sha384;
