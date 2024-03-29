@@ -130,17 +130,18 @@ impl<T: Hasher> MerkleTree<T> {
 
     /// Returns helper nodes required to build a partial tree for the given indices
     /// to be able to extract a root from it. Useful in constructing Merkle proofs
-    fn helper_nodes(&self, leaf_indices: &[usize]) -> Vec<T::Hash> {
+    fn helper_nodes(&self, leaf_indices: &[usize]) -> (Vec<usize>, Vec<T::Hash>) {
         let mut helper_nodes = Vec::<T::Hash>::new();
+        let mut index_list = Vec::<usize>::new();
 
         for layer in self.helper_node_tuples(leaf_indices) {
             for (_index, hash) in layer {
-                println!("the _index is : {:?}", _index);
+                index_list.push(_index % 2);
                 helper_nodes.push(hash)
             }
         }
 
-        helper_nodes
+       (index_list, helper_nodes)
     }
 
     /// Gets all helper nodes required to build a partial merkle tree for the given indices,
@@ -196,8 +197,10 @@ impl<T: Hasher> MerkleTree<T> {
     /// # Ok(())
     /// # }
     /// ```
-    pub fn proof(&self, leaf_indices: &[usize]) -> MerkleProof<T> {
-        MerkleProof::<T>::new(self.helper_nodes(leaf_indices))
+    pub fn proof(&self, leaf_indices: &[usize]) -> (Vec<usize>, MerkleProof<T>) {
+        let (index_list, proof) = self.helper_nodes(leaf_indices);
+        let merkle_proof = MerkleProof::<T>::new(proof);
+        (index_list, merkle_proof)
     }
 
     /// Inserts a new leaf. Please note it won't modify the root just yet; For the changes
