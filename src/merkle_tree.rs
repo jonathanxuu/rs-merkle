@@ -1,5 +1,3 @@
-use std::println;
-
 use crate::prelude::*;
 use crate::{partial_tree::PartialTree, utils, utils::indices, Hasher, MerkleProof};
 
