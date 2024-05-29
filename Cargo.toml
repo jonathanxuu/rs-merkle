@@ -18,7 +18,7 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 sha2 = { version = "0.10", default-features = false }
-rescue-prime-optimized = { git = "https://github.com/jonathanxuu/RescuePrimeOptimiezd.git", branch = "lib", default-features = false }
+rescue-prime-optimized = { git = "https://github.com/jonathanxuu/RescuePrimeOptimiezd.git", branch = "v0.9", default-features = false }
 bytemuck = "1.15.0"
 
 # standard crate data is left out
